@@ -117,7 +117,8 @@ if($_GET['mobile'] == "1") $mobile = true;
         Today I would have done another idea, but I had trouble programming said idea.<br>
         So instead, you get this.<br>
         Today, no mine can be next to another mine, whether it's orthogonally or diagonally.<br>
-        Because every mine essentially acts like a 0, there are more mines this week.
+        Because every mine essentially acts like a 0, there are more mines this week.<br><br>
+        Note: This week has been modified from the standalone version because the standalone version sometimes didn't generate.
       </div>
     </center>
   <!--- Scripts --->
@@ -138,7 +139,7 @@ if($_GET['mobile'] == "1") $mobile = true;
     var mobileLeftclick = true;
     // *************************************************************************************** //
     
-    var Generator = {sx: 20, sy: 20, mineMax: 1, amount:[75], shape:Shape_Normal, wrap:[0,0],
+    var Generator = {sx: 20, sy: 20, mineMax: 1, amount:[70], shape:Shape_Normal, wrap:[0,0],
     altGenFnct: function(posX,posY){
       let i = 0;
       let Reach = getReachable(posX, posY);
