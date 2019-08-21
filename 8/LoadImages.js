@@ -22,7 +22,7 @@ function createTextures(){
   }
 
   specialNum = [27, 30, 32, 35, 37, 40]
-  for(i=0;i<5;i++){
+  for(i=0;i<6;i++){
     Textures.Ground[specialNum[i]] = new Image();
     Textures.Ground[specialNum[i]].src = "Ground_" + specialNum[i] + ".png";
   }
