@@ -162,7 +162,7 @@ table, th, td, tr{
 table.invis, th.invis, td.invis, tr.invis{
 	border-collapse: collapse;
 	border: 0px;
-  font-size: 10;
+  font-size: x-small;
   text-align: center;
 }
 
@@ -174,8 +174,8 @@ tr.lrn {
 
 td.tbn {
   border-collapse: collapse;
-	border: 0px;
-  font-size: 10;
+	border: 10px;
+  font-size: x-small;
   width: 14px;
 }
 
