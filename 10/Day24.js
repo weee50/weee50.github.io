@@ -2,7 +2,7 @@
 http://heptaveegesimal.com
 */
 function initDay24(){
-  let link="http://heptaveegesimal.com/2018/advent-calendar/";
+  let link="weee50.github.io/10/";
   Generator = {sx: 1, sy: 1, mineMax: 3, amount:[0,0,0], shape:Shape_Normal, wrap:[0,0], entities:[], deathTimer:0, zenDensity:0, postGenFnct:null};
   Generator.sx = parseInt(Day24.elements.size.x.value);
   Generator.sy = parseInt(Day24.elements.size.y.value);
