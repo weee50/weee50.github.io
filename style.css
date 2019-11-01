@@ -224,13 +224,13 @@ button.daybutton_inactive{
     color: #2e2e2e;
 }
 
-button.daybutton_black{
-    background-color: #000000;
-	border: 2px solid #000000;
+button.daybutton_spoopy{
+    background-color: #cc731b;
+	border: 2px solid #ad6b28;
 	color: #000000;
 }
 
-button.daybutton_inactive, button.daybutton_active, button.daybutton_black{
+button.daybutton_inactive, button.daybutton_active, button.daybutton_spoopy{
     text-align: center;
     font-weight: bold;
     display: inline-block;
