@@ -18,6 +18,10 @@ function updateThings(){
 
 
   // probably very bad code for rightpadding the seconds decimal
+  if (mslMillisPart % 1000 == 0)
+  {
+    metasecondLength += ".0";
+  }
   if (mslMillisPart % 10 == 0)
   {
     metasecondLength += "0";
