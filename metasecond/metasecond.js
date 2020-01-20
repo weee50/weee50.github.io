@@ -35,7 +35,6 @@ function updateThings(){
   mspMillisPart = metasecondsPassed - Math.floor(metasecondsPassed);
 
   mmpFactor = Math.floor(Math.log10(metasecondLength));
-  console.log(mmpFactor);
 
   mspMillisPart = String(mspMillisPart).substring(1,mmpFactor + 5);
   // because this is obviously the best way to round a decimal
