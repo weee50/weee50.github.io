@@ -2,12 +2,12 @@ function updateThings(){
   if (document.getElementById("responseRadio").checked)
   {
     var metasecondLength = (Date.now() - 1578535490000);
-    document.getElementById("passedsince").innerHTML = "metaseconds have passed since the creation of my metasecond response"
+    document.getElementById("passedsince").innerHTML = "have passed since the creation of my metasecond response"
   }
   else
   {
     var metasecondLength = Date.now();
-    document.getElementById("passedsince").innerHTML = "metaseconds have passed since the Unix epoch"
+    document.getElementById("passedsince").innerHTML = "have passed since the Unix epoch"
   }
 
   var mslMillisPart = metasecondLength % 1000;
@@ -49,7 +49,7 @@ function updateThings(){
   metasecondsPassed = Math.floor(metasecondsPassed) + mspMillisPart; // yes, quite hacky code
 
   document.getElementById("msvalue").innerHTML = metasecondLength + " seconds";
-  document.getElementById("mspassed").innerHTML = metasecondsPassed + " seconds";
+  document.getElementById("mspassed").innerHTML = metasecondsPassed + " metaseconds";
 }
 
 setInterval(updateThings, 1);
