@@ -19,12 +19,12 @@
       <br><br>
 
       <img src="twow.png" alt="TWOW 23A and unknown thumbnails" height="125">
-      <h1>The gap between TWOW 23B and 24A (so far) is:</h1>
+      <h1>The gap between TWOW 23B and today is:</h1>
       <p id="twowDelay">XXXX days XX hrs XX mins XX secs</p><br>
 
       <br><br>
 
-      <h1 id="gapGapHeading">The BAGUETTE-TWOW gap will beat the 23B-24A gap in:</h1>
+      <h1 id="gapGapHeading">The BAGUETTE-TWOW gap will beat the 23B-today gap in:</h1>
       <p id="gapGap">X days XX hrs XX mins XX secs</p>
     </center>
     <script>
@@ -53,7 +53,8 @@
         gapGap = baguetteGap - twowGap;
         if (gapGap < 0)
         {
-          document.getElementyById("gapGapHeading").innerHTML = "The BAGUETTE-TWOW gap has beaten the 23B-24A gap!";
+          document.getElementyById("gapGapHeading").innerHTML = "The BAGUETTE-TWOW gap has beaten the 23B-today gap by:";
+          document.getElementById("gapGap").innerHTML = convertToDHMS(gapGap * -1);
         }
         else
         {
