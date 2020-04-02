@@ -24,7 +24,7 @@
 
       <br><br>
 
-      <h1 id="gapGapHeading">The BAGUETTE-TWOW gap will beat the 23B-today gap in:</h1>
+      <h1 id="gapGapHeading">The 23B-today gap will beat the BAGUETTE-TWOW gap in:</h1>
       <p id="gapGap">X days XX hrs XX mins XX secs</p>
     </center>
     <script>
@@ -53,7 +53,7 @@
         gapGap = baguetteGap - twowGap;
         if (gapGap < 0)
         {
-          document.getElementById("gapGapHeading").innerHTML = "The BAGUETTE-TWOW gap has beaten the 23B-today gap by:";
+          document.getElementById("gapGapHeading").innerHTML = "The 23B-today gap has beaten the BAGUETTE-TWOW gap by:";
           document.getElementById("gapGap").innerHTML = convertToDHMS(gapGap * -1);
         }
         else
