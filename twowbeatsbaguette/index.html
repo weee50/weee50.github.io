@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>TWOW Gap Beating BAGUETTE Gap</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <center>
+      <br>
+
+      <img src="baguette.png" alt="BAGUETTE 6B and TWOW 0A thumbnails" height="125">
+      <h1>The gap between BAGUETTE 6B and TWOW 0A is:</h1>
+      <p id="bagDelay">XXXX days XX hrs XX mins XX secs</p><br>
+
+      <br><br>
+
+      <img src="twow.png" alt="TWOW 23A and unknown thumbnails" height="125">
+      <h1>The gap between TWOW 23B and 24A (so far) is:</h1>
+      <p id="twowDelay">XXXX days XX hrs XX mins XX secs</p><br>
+
+      <br><br>
+
+      <h1 id="gapGapHeading">The BAGUETTE-TWOW gap will beat the 23B-24A gap in:</h1>
+      <p id="gapGap">X days XX hrs XX mins XX secs</p>
+    </center>
+    <script>
+      function convertToDHMS(duration)
+      {
+        days = Math.floor(duration / 86400);
+        hours = Math.floor(duration / 3600) % 24;
+        minutes = Math.floor(duration / 60) % 60;
+        seconds = duration % 60;
+        return days + " days " + hours + " hrs " + minutes + " mins " + seconds + " secs"
+      }
+
+      baguetteRelease = 1364877585;
+      twow0ARelease = 1449964872;
+      twow23BRelease = 1501198361;
+
+      baguetteGap = twow0ARelease - baguetteRelease;
+      document.getElementById("bagDelay").innerHTML = convertToDHMS(baguetteGap);
+
+      function updateGaps()
+      {
+        currentTime = Math.floor(new Date().getTime() / 1000);
+        twowGap = currentTime - twow23BRelease;
+        document.getElementById("twowDelay").innerHTML = convertToDHMS(twowGap);
+
+        gapGap = baguetteGap - twowGap;
+        if (gapGap < 0)
+        {
+          document.getElementyById("gapGapHeading").innerHTML = "The BAGUETTE-TWOW gap has beaten the 23B-24A gap!";
+        }
+        else
+        {
+          document.getElementById("gapGap").innerHTML = convertToDHMS(gapGap);
+        }
+      }
+      setInterval(updateGaps, 20);
+
+    </script>
+  </body>
+</html>
