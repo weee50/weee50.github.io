@@ -1,4 +1,5 @@
 //Yeah, I know it's pretty unorganized at the moment
+
 let factorMult = 1
 let bfactorMult = 1
 let succAutoMult = 1
