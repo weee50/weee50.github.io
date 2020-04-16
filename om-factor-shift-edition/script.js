@@ -9,10 +9,10 @@ setMarks()
 let clickCoolDown = 0
 let infinityButtonText = 0
 let game
-let factorShiftCosts=[200, 500, 2000, 20000, 1e+7, 2e+8, 2e+9, 5e+11, 1e+13, 1e+14, 1e+15, 1e+18, 5e+20, 1e+22, 2e+23,
-    6e+24, 8e+25, 1.6e+27, 5e+32, 4e+34, 1e+36, 2e+37, 5e+40, 1e+42, 2.5e+43, 1e+46, 2e+47, 1e+51, 5e+60, 1e+62, 5e+63,
-    1e+65, 5e+66, 7e+102, 4e+104, 1e+106, 5e+110, 1e+112, 2e+122, 1e+125, 1e+143, 2e+145, 5e+150, 1e+202, 1.5e+204,
-    2e+206, 5e+211, 5e+213, 2e+215, 1e+221, Infinity]
+let factorShiftCosts=[200, 500, 2000, 1e+5, 2e+8, 2e+9, 2.5e+11, 1e+13, 1e+14, 5e+15, 1e+18, 5e+20, 1e+24, 3e+25,
+  1e+27, 2e+28, 5e+30, 1e+33, 5e+34, 5e+40, 1e+43, 5e+44, 1e+46, 5e+47, 1e+51, 3e+54, 1.5e+56, 3e+67, 5e+100, 2e+102,
+  5e+103, 3e+105, 1e+107, 5e+114, 2e+116, 1e+121, 5e+122, 5e+124, 1e+141, 1e+144, 1e+202, 1e+204, 1e+206, 1e+223,
+  2e+225, 5e+231, 1e+234, 1e+236, 2e+241, 3e+243, Infinity]
 let factorCostExp=[2,2,2,3,3,6,30]
 const bupUpgradeCosts=[1,1,1,NaN,4,3,1,NaN,16,4,2,NaN,32,20,50,NaN]
 const slugMile=[10**10,20,15,12,10,8,6,5,4,3,2,1,-1]
@@ -82,10 +82,10 @@ function reset() {
   manifolds: 0,
   iups: [0,0,0,0,0,0,0,0,0],
   buchholz: 1,
-  theme: 0,
+  theme: 1,
   msint: 50,
   maxOrdLength: {less: 8,more: 10},
-  colors: 0,
+  colors: 1,
   music: 0,
   chal8: 0,
   chal8Comp: 0,
@@ -495,7 +495,7 @@ function loop(ms) {
 function render() {
   let outSize = fghexp((game.ord % (game.base**3)+0.1)/(game.base**2),Math.pow(2,Math.floor((game.ord % (game.base**2)+0.1)/game.base))*(game.base+game.over+(game.ord % game.base)))
   ordColor = "no"
-  let ordSub = (game.ord<=10**100?displayOrd(game.ord,game.base,game.over,0,0,0,game.colors):displayOrd(Math.round(game.ord/(10**270)+1)*10**270-10**270,3,0,0,0,0,game.colors))
+  let ordSub = (displayOrd(game.ord,game.base,game.over,0,0,0,game.colors))
   document.getElementById("hardy").innerHTML=colorWrap("H",ordColor)+"<sub>" + ordSub + "</sub><text class=\"invisible\">l</text>"+colorWrap("(" + game.base + ")" + (game.ord >= (game.base**3) || outSize >= 10**264 || (game.ord>=5 && game.base==2) ? "" : "=" + beautify(outSize)),ordColor)
   game.canInf = (game.ord >= (game.base**3) || outSize >= (game.leastBoost<=15?100:10240) || outSize >= Infinity)
   if (game.infUnlock==1) {
@@ -536,7 +536,11 @@ function render() {
   factorMult=1
   if (game.factors.length>0) {
     for(let factorListCounter=0;factorListCounter<game.factors.length;factorListCounter++){
-      factorMult *= (1 + (game.factors[factorListCounter] * game.upgrades.includes(14) ? (game.upgrades.includes(15) ? 3 : 2) : 1) + (game.upgrades.includes(2) ? 2 * (game.challenge==3||game.challenge==7?2:1) : 0) + (game.upgrades.includes(10) ? 2 * (game.challenge==3||game.challenge==7?2:1) : 0) ) * (game.upgrades.includes(1)?2:1);
+      factorMult *= (1 +
+        (game.factors[factorListCounter] * (game.upgrades.includes(14) ? (game.upgrades.includes(15) ? 3 : 2) : 1)) +
+        (game.upgrades.includes(2) ? 2 * (game.challenge==3||game.challenge==7?2:1) : 0) +
+        (game.upgrades.includes(10) ? 2 * (game.challenge==3||game.challenge==7?2:1) : 0)) *
+        (game.upgrades.includes(1) ? 3 : 1);
       // upgrades replaced here
     }
   }
@@ -1041,7 +1045,7 @@ function updateFactors() {
   if (game.factors.length>=0) {
     let factorListHTML=""
     for(let factorListCounter=0;factorListCounter<Math.min(game.factors.length, 8);factorListCounter++){
-      factorListHTML = factorListHTML + "<li>Factor " + (factorListCounter+1) + " x" + (1 + (game.upgrades.includes(2) ? 2 * (game.challenge==3||game.challenge==7?2:1) : 0) + (game.upgrades.includes(10) ? 2 * (game.challenge==3||game.challenge==7?2:1) : 0) + game.factors[factorListCounter]*(game.upgrades.includes(14) ? (game.upgrades.includes(15) ? 3 : 2) : 1)) * (game.upgrades.includes(1)?2:1) + " <button onclick=\"buyFactor(" + factorListCounter + ")\" class=\"infinityButton\">Increase Factor " + (factorListCounter+1) + " for " + beautify(Math.pow(10**(factorListCounter+1),Math.pow(typeof(factorCostExp[factorListCounter]) != "undefined" ? factorCostExp[factorListCounter] : 100, game.factors[factorListCounter]))) + " OP</button></li>"
+      factorListHTML = factorListHTML + "<li>Factor " + (factorListCounter+1) + " x" + (1 + (game.upgrades.includes(2) ? 2 * (game.challenge==3||game.challenge==7?2:1) : 0) + (game.upgrades.includes(10) ? 2 * (game.challenge==3||game.challenge==7?2:1) : 0) + game.factors[factorListCounter]*(game.upgrades.includes(14) ? (game.upgrades.includes(15) ? 3 : 2) : 1)) * (game.upgrades.includes(1)?4:1) + " <button onclick=\"buyFactor(" + factorListCounter + ")\" class=\"infinityButton\">Increase Factor " + (factorListCounter+1) + " for " + beautify(Math.pow(10**(factorListCounter+1),Math.pow(typeof(factorCostExp[factorListCounter]) != "undefined" ? factorCostExp[factorListCounter] : 100, game.factors[factorListCounter]))) + " OP</button></li>"
     }
     if (game.factors.length > 8)
     {
@@ -1051,7 +1055,7 @@ function updateFactors() {
       }
 
       let factorListCounter = game.factors.length - 1;
-      factorListHTML = factorListHTML + "<li>Factor " + (factorListCounter+1) + " x" + (1 + (game.upgrades.includes(2) ? 2 * (game.challenge==3||game.challenge==7?2:1) : 0) + (game.upgrades.includes(10) ? 2 * (game.challenge==3||game.challenge==7?2:1) : 0) + game.factors[factorListCounter]*(game.upgrades.includes(14) ? (game.upgrades.includes(15) ? 3 : 2) : 1)) * (game.upgrades.includes(1)?2:1) + " <button onclick=\"buyFactor(" + factorListCounter + ")\" class=\"infinityButton\">Increase Factor " + (factorListCounter+1) + " for " + beautify(Math.pow(10**(factorListCounter+1),Math.pow(typeof(factorCostExp[factorListCounter]) != "undefined" ? factorCostExp[factorListCounter] : 100, game.factors[factorListCounter]))) + " OP</button></li>"
+      factorListHTML = factorListHTML + "<li>Factor " + (factorListCounter+1) + " x" + (1 + (game.upgrades.includes(2) ? 2 * (game.challenge==3||game.challenge==7?2:1) : 0) + (game.upgrades.includes(10) ? 2 * (game.challenge==3||game.challenge==7?2:1) : 0) + game.factors[factorListCounter]*(game.upgrades.includes(14) ? (game.upgrades.includes(15) ? 3 : 2) : 1)) * (game.upgrades.includes(1)?4:1) + " <button onclick=\"buyFactor(" + factorListCounter + ")\" class=\"infinityButton\">Increase Factor " + (factorListCounter+1) + " for " + beautify(Math.pow(10**(factorListCounter+1),Math.pow(typeof(factorCostExp[factorListCounter]) != "undefined" ? factorCostExp[factorListCounter] : 100, game.factors[factorListCounter]))) + " OP</button></li>"
       
     }
     document.getElementById("factorListMain").innerHTML=factorListHTML
